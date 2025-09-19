@@ -1,81 +1,56 @@
-# BankNordic
-# ATM Application
+💳  -- BANKNORDIC -- ATM Console Application in C#
+🧠 Purpose
+This project is an exercise in object-oriented programming (OOP) with a focus on:
 
-An object-oriented ATM application built with C# demonstrating fundamental OOP concepts and encapsulation.
+Classes, objects, methods, and properties in C#
 
-## Features
+Data encapsulation using private fields and public properties/methods
 
-* PIN-based login with three attempts
-* Deposit functionality
-* Withdrawal functionality
-* Balance display
-* Error handling and validation
-* Clear menu
-* Logout
+Console-based input/output and control structures
 
-## Technical Details
+Version control using Git
 
-* Built with C# and .NET Core
-* Implements object-oriented principles:
-  * Encapsulation through private fields and public properties/methods
-  * Composition between Customer, Person and BankAccount classes
-  * Validation and error handling
-  * Read-only properties for immutable data
+🚀 How to Run the Program
+Clone or download the project from GitHub
 
-## Installation and Running
+Open the terminal in the project directory
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/atm.git
-   ```
-2. Navigate to the project:
-   ```bash
-   cd atm
-   ```
-3. Run the application:
-   ```bash
-   dotnet run
-   ```
+Run the command: dotnet run
 
-## Class Structure
+git remote add origin https://github.com/ditt-användarnamn/banknordic.git
 
-The application consists of three main classes:
-### BankAccount
-- Manages account balance
-- Private `balance` field
-- Public methods for deposit and withdrawal
-- Read-only `Balance` property
 
-### Person
-- Stores personal information
-- Read-only properties for name and social security number
-- Validation of social security number format
+🏗️ Structure
+The project consists of the following classes:
 
-### Customer
-- Combines Person and BankAccount
-- Handles PIN authentication
-- Private `pinCode` field
+Person: Contains name and personal ID number (readonly)
 
-## OOP Concepts Implemented
+BankAccount: Manages balance, deposits, and withdrawals with validation
 
-* **Encapsulation**: All fields are private and exposed through controlled methods and properties
-* **Composition**: Customer class contains both Person and BankAccount
-* **Validation**: All inputs are validated before acceptance
-* **Error Handling**: Clear error messages in English
-* **Read-only**: Person information and PIN code are immutable after creation
+Customer: Links a person to a bank account and handles PIN authentication
 
-## Version History
+Program: Main logic for the ATM, including login, menu, and user flow
 
-* 1.0.0: Initial version with basic functionality
-* 1.1.0: Improved error handling and PIN validation
-* 1.2.0: Added read-only properties and improved code structure
+🔐 Encapsulation
+Encapsulation is used to protect sensitive data:
 
-## Requirements Met
+balance in BankAccount is private and accessed only via the read-only Balance property
 
-* ✓ PIN-based authentication
-* ✓ Menu-based interaction
-* ✓ Deposit, withdrawal and balance check functions
-* ✓ Validation of all transactions
-* ✓ Clear separation of responsibilities between classes
-* ✓ Robust error handling
+The Deposit() and Withdraw() methods validate the amount before modifying the balance
 
+The PIN code in Customer is private and compared using the Authenticate() method
+
+✅ Features
+
+Login with PIN code (max 3 attempts)
+
+Deposit and withdrawal with amount validation
+
+Balance displayed in currency format
+
+Color design and clear menu interface
+
+Option to log out or exit the program
+
+🏁 Final Notes
+This ATM project demonstrates how to build a simple yet robust application using OOP and encapsulation in C#. It’s a great example of how to structure code, handle user input, and protect internal data.
