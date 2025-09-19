@@ -1,6 +1,6 @@
 ﻿public class Customer
 {
-    private readonly string pinCode = "1234"; // Readonly
+    private readonly string pinCode = "1234"; // Readonly field for PIN code
     public Person Person { get; }
     public BankAccount Account { get; }
 
