@@ -1,12 +1,17 @@
-﻿class Program
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+
+class Program
 {
     static void Main()
     {
         var customer = new Customer(
             new Person("Agge Jacobsson", "19920309-1234"),
-            1000m // Startsaldo
+            1000m // Starting balance
         );
-        // Added Design
+
+        // BANKNORDIC building-style design
         Console.BackgroundColor = ConsoleColor.Black;
         Console.ForegroundColor = ConsoleColor.Cyan;
 
@@ -18,82 +23,100 @@
         Console.WriteLine("    |        |      |");
         Console.WriteLine("    |        |      |");
         Console.WriteLine("    |________|______|");
-       
 
         Console.ResetColor();
-        Console.WriteLine("\nVälkommen till BANKNORDIC!");
+        Console.WriteLine("\nWelcome to BANKNORDIC!");
 
+        // PIN animation before login
+        Console.Write("\nStarting PIN verification");
+        for (int i = 0; i < 3; i++)
+        {
+            Console.Write(".");
+            Thread.Sleep(500);
+        }
+        Console.WriteLine("\n");
 
-        // Försök logga in tre gånger
         int attempts = 0;
         const int maxAttempts = 3;
         bool isLoggedIn = false;
 
         while (attempts < maxAttempts && !isLoggedIn)
         {
-            Console.Write("Ange din PIN-kod (4 siffror): ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("Enter your 4-digit PIN: ");
+            Console.ResetColor();
+
             string pinInput = Console.ReadLine();
 
-            // Validera att PIN-koden är 4 siffror
             if (pinInput.Length != 4)
             {
-                Console.WriteLine("Fel: PIN-koden måste vara exakt 4 siffror!");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Error: PIN must be exactly 4 digits!");
+                Console.ResetColor();
                 attempts++;
                 continue;
             }
 
-            // Försök logga in
+            Console.Write("Verifying");
+            for (int i = 0; i < 3; i++)
+            {
+                Console.Write(".");
+                Thread.Sleep(400);
+            }
+
             if (customer.Authenticate(pinInput))
             {
-                Console.WriteLine("Välkommen " + customer.Person.Name + "!");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\n✅ PIN accepted! Welcome " + customer.Person.Name + "!");
+                Console.ResetColor();
                 isLoggedIn = true;
             }
             else
             {
                 attempts++;
-                Console.WriteLine($"Felaktig PIN-kod! {maxAttempts - attempts} försök kvar.");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"\n❌ Incorrect PIN! {maxAttempts - attempts} attempts left.");
+                Console.ResetColor();
             }
         }
 
-        // Om alla försök är slut
         if (!isLoggedIn)
         {
-            Console.WriteLine("För många felaktiga försök. Bankomaten har låstats.");
+            Console.WriteLine("Too many failed attempts. ATM is locked.");
             return;
         }
 
-        // Huvudmenyn
         bool running = true;
         while (running)
         {
             Console.Clear();
             Console.BackgroundColor = ConsoleColor.Green;
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.WriteLine($"\nVälkommen {customer.Person.Name}!");
+            Console.WriteLine($"\nWelcome {customer.Person.Name}!");
 
             Console.BackgroundColor = ConsoleColor.Cyan;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine();
             Console.WriteLine("┌────────────┐");
-            Console.WriteLine("│  MENY     │");
+            Console.WriteLine("│   MENU     │");
             Console.WriteLine("└────────────┘");
-            Console.WriteLine();  // Lagt till en blankrad
+            Console.WriteLine();
 
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("1. [+] Sätt in pengar");
-            Console.WriteLine("2. [-] Ta ut pengar");
-            Console.WriteLine("3. [=] Visa saldo");
-            Console.WriteLine("4. [X] Logga ut");
-            Console.WriteLine("5. [Q] Avsluta");
+            Console.WriteLine("1. [+] Deposit");
+            Console.WriteLine("2. [-] Withdraw");
+            Console.WriteLine("3. [=] Show Balance");
+            Console.WriteLine("4. [X] Logout");
+            Console.WriteLine("5. [Q] Exit");
 
             Console.WriteLine();
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("\nVälj ett alternativ (1-5): ");
+            Console.Write("\nChoose an option (1-5): ");
             Console.ResetColor();
-            int choice;
 
+            int choice;
             if (int.TryParse(Console.ReadLine(), out choice))
             {
                 switch (choice)
@@ -108,55 +131,54 @@
                         ShowBalance(customer.Account);
                         break;
                     case 4:
-                        Console.WriteLine("\nLoggar ut...");
+                        Console.WriteLine("\nLogging out...");
                         running = false;
                         break;
                     case 5:
-                        Console.WriteLine("\nAvslutar programmet...");
+                        Console.WriteLine("\nExiting program...");
                         return;
                     default:
-                        Console.WriteLine("Ogiltigt val. Välj 1-5.");
+                        Console.WriteLine("Invalid choice. Please select 1-5.");
                         PressAnyKey();
                         break;
                 }
             }
             else
             {
-                Console.WriteLine("Ogiltig inmatning. Ange ett nummer mellan 1-5.");
+                Console.WriteLine("Invalid input. Please enter a number between 1-5.");
                 PressAnyKey();
             }
         }
 
-        // Visa avslutningsmeddelande
-        Console.WriteLine($"\nTack för att du använder vår bankomat, {customer.Person.Name}!");
+        Console.WriteLine($"\nThank you for using BANKNORDIC, {customer.Person.Name}!");
         PressAnyKey();
     }
 
     private static void HandleDeposit(BankAccount account)
     {
-        decimal amount = GetAmount("Ange belopp att sätta in: ");
+        decimal amount = GetAmount("Enter deposit amount: ");
         account.Deposit(amount);
-        Console.WriteLine($"Insättning genomförd. Nytt saldo: {account.Balance:C}");
+        Console.WriteLine($"Deposit successful. New balance: {account.Balance:C}");
         PressAnyKey();
     }
 
     private static void HandleWithdrawal(BankAccount account)
     {
-        decimal amount = GetAmount("Ange belopp att ta ut: ");
+        decimal amount = GetAmount("Enter withdrawal amount: ");
         if (account.Withdraw(amount))
         {
-            Console.WriteLine($"Uttag genomfört. Nytt saldo: {account.Balance:C}");
+            Console.WriteLine($"Withdrawal successful. New balance: {account.Balance:C}");
         }
         else
         {
-            Console.WriteLine("Otillräckligt saldo eller ogiltigt belopp.");
+            Console.WriteLine("Insufficient funds or invalid amount.");
         }
         PressAnyKey();
     }
 
     private static void ShowBalance(BankAccount account)
     {
-        Console.WriteLine($"Saldo: {account.Balance:C}");
+        Console.WriteLine($"Current balance: {account.Balance:C}");
         PressAnyKey();
     }
 
@@ -169,13 +191,13 @@
             {
                 return amount;
             }
-            Console.WriteLine("Ogiltigt belopp. Försök igen.");
+            Console.WriteLine("Invalid amount. Try again.");
         }
     }
 
     private static void PressAnyKey()
     {
-        Console.WriteLine("\nTryck på valfri tangent för att fortsätta...");
+        Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey();
     }
 }
