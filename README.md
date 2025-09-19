@@ -52,5 +52,7 @@ Color design and clear menu interface
 
 Option to log out or exit the program
 
+Option Language (EN /Sv)
+
 🏁 Final Notes
 This ATM project demonstrates how to build a simple yet robust application using OOP and encapsulation in C#. It’s a great example of how to structure code, handle user input, and protect internal data.
