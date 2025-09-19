@@ -64,8 +64,8 @@
             Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine($"\nVälkommen {customer.Person.Name}!");
 
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine();
             Console.WriteLine("┌────────────┐");
             Console.WriteLine("│  MENY     │");
