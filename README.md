@@ -10,7 +10,8 @@ An object-oriented ATM application built with C# demonstrating fundamental OOP c
 * Withdrawal functionality
 * Balance display
 * Error handling and validation
-* Clear menu structure in English
+* Clear menu
+* Logout
 
 ## Technical Details
 
@@ -77,4 +78,4 @@ The application consists of three main classes:
 * ✓ Validation of all transactions
 * ✓ Clear separation of responsibilities between classes
 * ✓ Robust error handling
-* ✓ Documentation in English
+
