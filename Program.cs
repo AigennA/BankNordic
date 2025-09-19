@@ -3,19 +3,26 @@
     static void Main()
     {
         var customer = new Customer(
-            new Person("Maria Jacobsson", "19920309-1234"),
+            new Person("Agge Jacobsson", "19920309-1234"),
             1000m // Startsaldo
         );
         // Added Design
-        Console.BackgroundColor = ConsoleColor.White;
-        Console.ForegroundColor = ConsoleColor.DarkBlue;
-        Console.WriteLine("===================================");
-        Console.WriteLine("===         BANKNORDIC          ===");
-        Console.WriteLine("===================================");
-        Console.ResetColor();
+        Console.BackgroundColor = ConsoleColor.Black;
+        Console.ForegroundColor = ConsoleColor.Cyan;
 
-        Console.WriteLine();
-        Console.WriteLine("Välkommen till BANKNORDIC!");
+        Console.WriteLine("        _________");
+        Console.WriteLine("       /        /\\");
+        Console.WriteLine("      / BANK   /  \\");
+        Console.WriteLine("     / NORDIC /    \\");
+        Console.WriteLine("    /________/______\\");
+        Console.WriteLine("    |        |      |");
+        Console.WriteLine("    |        |      |");
+        Console.WriteLine("    |________|______|");
+       
+
+        Console.ResetColor();
+        Console.WriteLine("\nVälkommen till BANKNORDIC!");
+
 
         // Försök logga in tre gånger
         int attempts = 0;
