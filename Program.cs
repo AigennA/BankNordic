@@ -53,7 +53,7 @@ class Program
         {
             texts = new Dictionary<string, string>
             {
-                { "welcomeBank", "Welcome to BANKNORDIC!" },
+                { "Welcome to BankNORDIC", "Welcome to BANKNORDIC!" }, //Here spellings corrected
                 { "startingPin", "Starting PIN verification" },
                 { "enterPin", "Enter your 4-digit PIN: " },
                 { "pinError", "Error: PIN must be exactly 4 digits!" },
