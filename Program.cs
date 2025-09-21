@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
+using System.Threading.Tasks;
 
 class Program
 {
@@ -20,7 +20,7 @@ class Program
         {
             texts = new Dictionary<string, string>
             {
-                { "welcomeBank", "Välkommen till BANKNORDIC!" },
+                { "Welcome to BankNORDIC", "Välkommen till BANKNORDIC!" }, //Here spellings corrected
                 { "startingPin", "Startar PIN-kontroll" },
                 { "enterPin", "Ange din 4-siffriga PIN: " },
                 { "pinError", "Fel: PIN måste vara exakt 4 siffror!" },
