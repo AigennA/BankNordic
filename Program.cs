@@ -104,7 +104,7 @@ class Program
         Console.WriteLine("    |________|______|");
 
         Console.ResetColor();
-        Console.WriteLine("\n" + texts["welcomeBank"]);
+        Console.WriteLine("\n" + texts["Welcome to BankNORDIC"]); // Corrected spelling here
 
         // PIN animation before login
         Console.Write("\n" + texts["startingPin"]);
